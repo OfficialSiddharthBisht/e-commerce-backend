@@ -21,7 +21,7 @@ exports.getAllProducts = async(req, res) =>{
 
 // Update a product ---admin route--
 exports.updateProduct = async(req,res,next) =>{
-    let product = Product.findById("req.params.id");
+    let product = await Product.findById(req.params.id);
     if(!product){
         return res.status(500).json({
             success: false,
@@ -41,7 +41,7 @@ exports.updateProduct = async(req,res,next) =>{
 
 // Delete a product --admin route--
 exports.deleteProduct = async(req,res, next)=>{
-    let product = Product.findById(req.params.id);
+    let product = await Product.findById(req.params.id);
     if(!product){
         return res.status(500).json({
             success: false,
@@ -52,5 +52,20 @@ exports.deleteProduct = async(req,res, next)=>{
     res.status(200).json({
         success: true,
         message: "Product deleted successfully"
+    })
+}
+
+// Get single product -- product details
+exports.productDetails = async(req, res, next) =>{
+    let product = await Product.findById(req.params.id);
+    if(!product){
+        return res.status(500).json({
+            success: false,
+            message: "Product not found"
+        })
+    }
+    res.status(200).json({
+        success : true,
+        product
     })
 }
