@@ -1,0 +1,22 @@
+{
+  "name": "e-commerce-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OfficialSiddharthBisht/e-commerce-backend.git"
+  },
+  "keywords": [
+    "e-commerce-backend"
+  ],
+  "author": "Siddharth Bisht",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OfficialSiddharthBisht/e-commerce-backend/issues"
+  },
+  "homepage": "https://github.com/OfficialSiddharthBisht/e-commerce-backend#readme"
+}
