@@ -1,7 +1,7 @@
 const Product = require("../models/productModels");
 
 
-// Create Product ---admin route
+// Create Product ---admin route--
 exports.createProduct = async(req, res, next) =>{
     const product = await Product.create(req.body);
     res.status(201).json({
@@ -19,7 +19,7 @@ exports.getAllProducts = async(req, res) =>{
     });
 }
 
-// Update a product ---admin route
+// Update a product ---admin route--
 exports.updateProduct = async(req,res,next) =>{
     let product = Product.findById("req.params.id");
     if(!product){
