@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "nodemon server.js",
+    "deployStart" : "node server.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +20,11 @@
   "bugs": {
     "url": "https://github.com/OfficialSiddharthBisht/e-commerce-backend/issues"
   },
-  "homepage": "https://github.com/OfficialSiddharthBisht/e-commerce-backend#readme"
+  "homepage": "https://github.com/OfficialSiddharthBisht/e-commerce-backend#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.6.5",
+    "nodemon": "^2.0.20"
+  }
 }
