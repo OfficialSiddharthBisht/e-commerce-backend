@@ -6,9 +6,11 @@ const connectDatabase = ()=>{
         useUnifiedTopology :true,
     }).then((data)=>{
         console.log(`Mongodb connected with server : ${data.connection.host}`);
-    }).catch((err)=>{
-        console.log(err);
     })
+    // Removed since we have handled unhandled promise rejection errors
+    // .catch((err)=>{
+    //     console.log(err);
+    // })
 }
 
 module.exports = connectDatabase;
