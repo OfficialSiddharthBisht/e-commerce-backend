@@ -22,16 +22,27 @@ class ApiFeatures{
         // const queryCopy = this.queryStr 
         // this will take the exact reference , changing one will change the other too, so we will use spread operator
         const queryCopy = {...this.queryStr};
-        console.log("before ",queryCopy);
         // Removing some fields for category
         const removeFields = ["keyword","page","limit"];
         removeFields.forEach(key=> delete queryCopy[key]);
-        console.log("after ",queryCopy);
         
-        this.query = this.query.find(queryCopy);
+        // Filter for price and rating
+        let queryStr = JSON.stringify(queryCopy);
+        queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g,key => `$${key}`);
+
+        this.query = this.query.find(JSON.parse(queryStr));
         return this;
     }
     // categories can be case sensitive cauz user will not search for the category he/she will choose from the given ones
+
+    // Pagination
+    pagination(resultPerPage){
+        const currentPage = Number(this.queryStr.page) || 1;
+        const skip = resultPerPage * (currentPage - 1);
+
+        this.query = this.query.limit(resultPerPage).skip(skip);
+        return this;
+    }
 }
 
 module.exports = ApiFeatures;
