@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "nodemon server.js",
-    "deployStart" : "node server.js"
+    "start": "nodemon server.js",
+    "deployStart": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -22,9 +22,15 @@
   },
   "homepage": "https://github.com/OfficialSiddharthBisht/e-commerce-backend#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.1",
+    "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.5",
-    "nodemon": "^2.0.20"
+    "nodemailer": "^6.8.0",
+    "nodemon": "^2.0.20",
+    "validator": "^13.7.0"
   }
 }
