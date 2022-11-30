@@ -53,3 +53,24 @@ Get Request
 http://localhost:3005/api/v1/product/635038da3c973c2971ecadd5
 ```
 
+## Product Feature Routes
+
+### 1 -> Search Feature
+Get Request
+```
+http://localhost:3005/api/v1/products?keyword=iphone
+```
+
+### 2 -> Filter By Category Feature
+Get Request
+```
+http://localhost:3005/api/v1/products?keyword=i&category=Smartphones
+```
+
+### 3 -> Filter by price feature
+Get request
+```
+http://localhost:3005/api/v1/products?keyword=i&price[gte]=100&price[lt]=200000
+```
+
+
