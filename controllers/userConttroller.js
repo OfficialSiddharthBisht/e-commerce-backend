@@ -207,3 +207,11 @@ exports.getSingleUser = catchAsyncErrors(async (req, res, next) => {
         user,
     });
 });
+
+// User Role update by admin
+exports.updateUserProfile = catchAsyncErrors(async (req, res, next) => {
+    const newUserData = {
+        name: req.body.name,
+        email: req.body.email,
+    }
+})
