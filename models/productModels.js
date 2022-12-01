@@ -31,44 +31,44 @@ const productSchema = new mongoose.Schema({
             }
         }
     ],
-    categories : {
-        type : String,
-        required : [true, "Please enter product category"],
+    categories: {
+        type: String,
+        required: [true, "Please enter product category"],
     },
-    stock : {
-        type : Number,
-        required : [true, "Please enter product stock"],
+    stock: {
+        type: Number,
+        required: [true, "Please enter product stock"],
         maxLength: [5, "Product stock cannot exceed ten thousand"],
-        default : 0,
+        default: 0,
     },
-    numOfReviews : {
-        type : Number,
-        default : 0,
+    numOfReviews: {
+        type: Number,
+        default: 0,
     },
-    reviews : [
+    reviews: [
         {
-            name : {
-                type : String,
+            name: {
+                type: String,
                 required: true,
             },
-            rating :{
-                type : Number,
-                required :true,
+            rating: {
+                type: Number,
+                required: true,
             },
             comment: {
                 type: String,
             }
         }
     ],
-    user:{
+    user: {
         type: mongoose.Schema.ObjectId,
         ref: "User",
         required: true,
     },
-    createdAt : {
-        type :Date,
-        default : Date.now,
+    createdAt: {
+        type: Date,
+        default: Date.now,
     }
 });
 
-module.exports = mongoose.model("Product",productSchema);
+module.exports = mongoose.model("Product", productSchema);

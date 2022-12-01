@@ -1,6 +1,6 @@
 //Creating Token and saving in cookie 
 
-const sendToken = async(user, statusCode, res) =>{
+const sendToken = async (user, statusCode, res) => {
     const token = await user.getJWTToken();
 
     // options for cookie
@@ -10,7 +10,7 @@ const sendToken = async(user, statusCode, res) =>{
         ),
         httpOnly: true,
     };
-    res.status(statusCode).cookie('token',token,options).json({
+    res.status(statusCode).cookie('token', token, options).json({
         success: true,
         user,
         token,

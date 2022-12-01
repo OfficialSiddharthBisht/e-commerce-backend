@@ -50,27 +50,27 @@ userSchema.pre("save", async function (next) {
 })
 
 // Jwt Token
-userSchema.methods.getJWTToken =async function () {
+userSchema.methods.getJWTToken = async function () {
     return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRE
     })
 }
 
 // Compare Password
-userSchema.methods.comparePassword = async function(enteredPassword){
-    return await bcrypt.compare(enteredPassword,this.password);
+userSchema.methods.comparePassword = async function (enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.password);
 }
 
 // Password reset token generate
-userSchema.methods.getResetPasswordToken = function(){
+userSchema.methods.getResetPasswordToken = function () {
     // Generating Token
     const resetToken = crypto.randomBytes(25).toString("hex");
 
     // Hashing and adding to userSchema
     this.resetPasswordToken = crypto
-    .createHash("sha256")
-    .update(resetToken)
-    .digest("hex");
+        .createHash("sha256")
+        .update(resetToken)
+        .digest("hex");
 
     this.resetPasswordExpire = Date.now() + 15 * 60 * 1000;
 
