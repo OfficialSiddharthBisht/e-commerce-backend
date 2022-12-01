@@ -1,5 +1,6 @@
 # e-commerce-backend
 
+
 ## Product Routes-
 ### 1 -> To get all the products
 Get Request
@@ -73,4 +74,82 @@ Get request
 http://localhost:3005/api/v1/products?keyword=i&price[gte]=100&price[lt]=200000
 ```
 
+## Authentication Routes
+
+### Register User
+Post Request
+```
+http://localhost:3005/api/v1/register
+```
+```
+{
+    "name": "sid",
+    "email": "sid@email.com",
+    "password": "password",
+    "role":"user"
+}
+```
+
+### User Login
+Post Request
+```
+http://localhost:3005/api/v1/login
+```
+```
+{
+    "email": "admin@email.com",
+    "password": "password"
+}
+```
+
+### Logout User
+Post Request
+```
+http://localhost:3005/api/v1/logout
+```
+
+## User Routes
+
+### 1 -> User Details (After user logged in)
+Get Request
+```
+http://localhost:3005/api/v1/me
+```
+
+### 2 -> User Password Update
+Put Request
+```
+http://localhost:3005/api/v1/password/update
+```
+```
+{
+    "oldPassword": "password",
+    "newPassword": "password",
+    "confirmPassword": "password"
+}
+```
+
+### 3 -> Update User Profile
+Put Request
+```
+http://localhost:3005/api/v1/me/update
+```
+```
+{
+    "name": "The Admin",
+    "email": "admin@email.com"
+}    
+```
+
+### 4 -> Get list of all users (for admin)
+Get Request
+```
+http://localhost:3005/api/v1/admin/users
+```
+
+### 5 -> Get Single user detail (for admin)
+Get Request
+```
+http://localhost:3005/api/v1/admin/user/6386288a6f61be886840e39a
+```
 
