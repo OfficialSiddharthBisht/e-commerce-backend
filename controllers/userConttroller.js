@@ -164,7 +164,7 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
     sendToken(user, 200, res);
 })
 
-// Update User Profile
+// Update User Profile when logged in
 exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
     const newUserData = {
         name: req.body.name,
@@ -183,6 +183,7 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
     })
 })
 
+// ! ADMIN
 // Get all users - for admin
 exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
     const users = await User.find();
@@ -193,6 +194,7 @@ exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
     })
 })
 
+// ! ADMIN
 // Get selected single user details for admin
 exports.getSingleUser = catchAsyncErrors(async (req, res, next) => {
     const user = await User.findById(req.params.id);
@@ -209,9 +211,36 @@ exports.getSingleUser = catchAsyncErrors(async (req, res, next) => {
 });
 
 // User Role update by admin
-exports.updateUserProfile = catchAsyncErrors(async (req, res, next) => {
+exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
     const newUserData = {
         name: req.body.name,
         email: req.body.email,
+        role: req.body.role,
+    };
+
+    const user = await User.findByIdAndUpdate(req.params.id, newUserData, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
+    });
+    res.status(200).json({
+        success: true,
+    })
+})
+
+// ! admin
+// Delete / Remove User by admin
+exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
+
+    const user = await User.findById(req.params.id);
+    // we will remove cloudnary
+
+    if (!user) {
+        return next(new ErrorHandler(`User does not exist with id: ${req.params.id}`));
     }
+
+    await user.remove();
+    res.status(200).json({
+        success: true,
+    })
 })
