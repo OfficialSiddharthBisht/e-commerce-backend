@@ -88,11 +88,11 @@ exports.productDetails = catchAsyncErrors(async (req, res, next) => {
 // Create New Review or Update the review
 
 exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
-    const { rating, comment, productId } = req.body
+    const { ratings, comment, productId } = req.body
     const review = {
         user: req.user._id,
         name: req.user.name,
-        rating: Number(rating),
+        ratings: Number(ratings),
         comment,
     };
     const product = await Product.findById(productId);
@@ -102,7 +102,7 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
     if (isReviewed) {
         product.reviews.forEach((rev) => {
             if (rev.user.toString() === req.user._id.toString()) {
-                rev.rating = rating,
+                rev.ratings = ratings,
                     rev.comment = comment
             }
         })
@@ -113,13 +113,15 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
 
     // average review calculate
     let average = 0;
-    product.ratings = product.reviews.forEach(rev => {
-        average += rev.rating
+    product.reviews.forEach(rev => {
+        average += rev.ratings
     }) / product.reviews.length;
 
+    product.ratings = average / product.reviews.length;
     await product.save({ validateBeforeSave: false });
 
     res.status(200).json({
         success: true,
     })
 })
+
