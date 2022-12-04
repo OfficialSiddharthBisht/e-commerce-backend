@@ -18,7 +18,7 @@ const orderSchema = new mongoose.Schema({
             required: true,
             default: "India",
         },
-        pinCode: {
+        pincode: {
             type: Number,
             required: true,
         },
