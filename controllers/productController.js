@@ -114,7 +114,7 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
     // average review calculate
     let average = 0;
     product.reviews.forEach(rev => {
-        average += rev.ratings
+        average += rev.rating
     }) / product.reviews.length;
 
     product.ratings = average / product.reviews.length;
@@ -125,3 +125,58 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
     })
 })
 
+// Get all reviews of a single product
+exports.getProductReviews = catchAsyncErrors(async (req, res, next) => {
+    const product = await Product.findById(req.query.id);
+
+    if (!product) {
+        return next(new ErrorHandler("Product not found", 404));
+    }
+
+    res.status(200).json({
+        success: true,
+        reviews: product.reviews,
+    });
+});
+
+// Delete Review
+exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
+    const product = await Product.findById(req.query.productId);
+
+    if (!product) {
+        return next(new ErrorHandler("Product not found", 404));
+    }
+
+    const reviews = product.reviews.filter(
+        (rev) => rev._id.toString() !== req.query.id.toString()
+    );
+
+    // average review calculate
+    let average = 0;
+    reviews.forEach((rev) => {
+        average += rev.rating;
+    });
+
+    let ratings = 0;
+    if (reviews.length === 0) {
+        ratings = 0;
+    } else {
+        ratings = average / reviews.length;
+    }
+
+    const numOfReviews = reviews.length;
+    await Product.findByIdAndUpdate(req.query.productId, {
+        reviews,
+        ratings,
+        numOfReviews,
+    }, {
+        new: true,
+        runValidators: true,
+        useFFindAndModify: false,
+    })
+
+    res.status(200).json({
+        success: true,
+    });
+
+})
