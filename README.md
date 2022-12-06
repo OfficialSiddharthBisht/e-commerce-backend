@@ -1,6 +1,5 @@
 # e-commerce-backend
 
-
 ## Product Routes-
 ### 1 -> To get all the products
 Get Request
@@ -153,3 +152,66 @@ Get Request
 http://localhost:3005/api/v1/admin/user/6386288a6f61be886840e39a
 ```
 
+## Order Routes
+
+### Create New Order
+Post Request
+```
+http://localhost:3005/api/v1/order/new
+```
+```
+
+```
+
+### Get Order Details (User)
+Get Request
+```
+http://localhost:3005/api/v1/orders/me
+```
+
+### Get All Order List (Admin)
+Get Request
+```
+http://localhost:3005/api/v1/admin/orders
+```
+
+### Get Order Details (Admin)
+Get Request
+```
+http://localhost:3005/api/v1/admin/order/:id
+```
+
+### Delete Order (Admin)
+Delete Request
+```
+http://localhost:3005/api/v1/admin/order/:id
+```
+
+### Update Orders (Admin)
+Put Request
+```
+http://localhost:3005/api/v1/admin/order/:id
+```
+```
+
+```
+
+## Reviews Routes
+
+### Create / Update Product Reviews
+Put Request
+```
+http://localhost:3005/api/v1/review
+```
+
+### Get Product Reviews
+Get Request
+```
+http://localhost:3005/api/v1/reviews
+```
+
+### Delete Product Reviews
+Delete Request
+```
+http://localhost:3005/api/v1/reviews
+```
