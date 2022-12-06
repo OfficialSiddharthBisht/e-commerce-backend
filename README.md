@@ -160,7 +160,33 @@ Post Request
 http://localhost:3005/api/v1/order/new
 ```
 ```
-
+{
+    "itemsPrice": 11000,
+    "taxPrice" : 400,
+    "shippingPrice": 600,
+    "totalPrice": 12000,
+    "orderItems" : [
+        {
+            "product": "6385851169cc1ec39c296460",
+            "name" : "i phone 6",
+            "price" : 12000,
+            "image": "sampleImg",
+            "quantity":1
+        }
+    ],
+    "shippingInfo":{
+        "address":"Charton Lodge Mallital Nainital",
+        "city": "Nainital",
+        "state":"Uttarakhand",
+        "country":"India",
+        "pincode":263001,
+        "phoneNo":8077305268
+    },
+    "paymentInfo":{
+        "id":"sample payment id",
+        "status":"succeeded"
+    }
+}
 ```
 
 ### Get Order Details (User)
@@ -187,13 +213,15 @@ Delete Request
 http://localhost:3005/api/v1/admin/order/:id
 ```
 
-### Update Orders (Admin)
+### Update Order Status (Admin)
 Put Request
 ```
 http://localhost:3005/api/v1/admin/order/:id
 ```
 ```
-
+{
+    "status": "Delivered"
+}
 ```
 
 ## Reviews Routes
@@ -202,6 +230,13 @@ http://localhost:3005/api/v1/admin/order/:id
 Put Request
 ```
 http://localhost:3005/api/v1/review
+```
+```
+{
+    "productId": "6385851169cc1ec39c296460",
+    "comment" : "Nice product loved its features",
+    "ratings" : 3
+}
 ```
 
 ### Get Product Reviews
