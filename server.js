@@ -11,13 +11,15 @@ process.on("uncaughtException", (err) => {
 
 // config
 dotenv.config({ path: "./config/config.env" });
+const port = process.env.PORT || 3005;
 
 // Connect Database
 connectDatabase();
 
 
-const server = app.listen(process.env.PORT, () => {
-    console.log(`Server is running on port ${process.env.port}`);
+const server = app.listen(port, () => {
+    console.log();
+    console.log(`Server is running on port ${port}`);
 })
 
 
