@@ -1,5 +1,6 @@
 # e-commerce-backend
 
+To use the routes using deployed link (heroku , cyclic) you can replace localhost link with the deployed link
 ## Product Routes-
 ### 1 -> To get all the products
 Get Request
