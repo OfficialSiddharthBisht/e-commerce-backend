@@ -5,8 +5,8 @@ const ApiFeatures = require("../utils/apiFeatures");
 
 // Create Product ---admin route--
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
-    req.body.user = req.user.id;
-    const product = await Product.create(req.body);
+    req.body.payload.user = req.user.id;
+    const product = await Product.create(req.body.payload);
     res.status(201).json({
         success: true,
         product
@@ -39,7 +39,7 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
         //     message: "Product not found"
         // })
     }
-    product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+    product = await Product.findByIdAndUpdate(req.params.id, req.body.payload, {
         new: true,
         runValidators: true,
         useFFindAndModify: false
@@ -88,7 +88,7 @@ exports.productDetails = catchAsyncErrors(async (req, res, next) => {
 // Create New Review or Update the review
 
 exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
-    const { ratings, comment, productId } = req.body
+    const { ratings, comment, productId } = req.body.payload
     const review = {
         user: req.user._id,
         name: req.user.name,
