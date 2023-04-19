@@ -15,7 +15,7 @@ exports.newOrder = catchAsyncErrors(async (req, res, next) => {
         taxPrice,
         shippingPrice,
         totalPrice,
-    } = req.body;
+    } = req.body.payload;
 
     const order = await Order.create({
         shippingInfo,
@@ -97,9 +97,9 @@ exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
         await updateStock(o.Product, o.quantity);
     });
 
-    order.orderStatus = req.body.status;
+    order.orderStatus = req.body.payload.status;
 
-    if (req.body.status === "Delivered") {
+    if (req.body.payload.status === "Delivered") {
         order.deliveredAt = Date.now();
     }
 
