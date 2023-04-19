@@ -8,7 +8,7 @@ const crypto = require("crypto");
 // Register a user
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 
-    const { name, email, password } = req.body;
+    const { name, email, password } = req.body.payload;
     const user = await User.create({
         name,
         email,
@@ -32,7 +32,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 
 // Login User 
 exports.loginUser = catchAsyncErrors(async (req, res, next) => {
-    const { email, password } = req.body;
+    const { email, password } = req.body.payload;
 
     // checking if user has given password and email both
     if (!email || !password) {
@@ -71,7 +71,7 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
 
 // Forgot Password
 exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
-    const user = await User.findOne({ email: req.body.email });
+    const user = await User.findOne({ email: req.body.payload.email });
     if (!user) {
         return next(new ErrorHandler("User not found", 404));
     }
@@ -125,7 +125,7 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
     if (req.body.password !== req.body.confirmPassword) {
         return next(new ErrorHandler("Password dosent match", 400))
     }
-    user.password = req.body.password;
+    user.password = req.body.payload.password;
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
 
@@ -147,15 +147,15 @@ exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
 // Update user password when logged in
 exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
     const user = await User.findById(req.user.id).select("+password")
-    const isPasswordMatched = await user.comparePassword(req.body.oldPassword);
+    const isPasswordMatched = await user.comparePassword(req.body.payload.oldPassword);
     if (!isPasswordMatched) {
         return next(new ErrorHandler("Old password is incorrect", 400));
     }
-    if (req.body.newPassword !== req.body.confirmPassword) {
+    if (req.body.payload.newPassword !== req.body.payload.confirmPassword) {
         return next(new ErrorHandler("Passord does not match", 400));
     }
 
-    user.password = req.body.newPassword;
+    user.password = req.body.payload.newPassword;
     await user.save();
     // res.status(200).json({
     //     success: true,
@@ -167,8 +167,8 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
 // Update User Profile when logged in
 exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
     const newUserData = {
-        name: req.body.name,
-        email: req.body.email,
+        name: req.body.payload.name,
+        email: req.body.payload.email,
         // ! avatar left
     }
 
@@ -213,9 +213,9 @@ exports.getSingleUser = catchAsyncErrors(async (req, res, next) => {
 // User Role update by admin
 exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
     const newUserData = {
-        name: req.body.name,
-        email: req.body.email,
-        role: req.body.role,
+        name: req.body.payload.name,
+        email: req.body.payload.email,
+        role: req.body.payload.role,
     };
 
     const user = await User.findByIdAndUpdate(req.params.id, newUserData, {
